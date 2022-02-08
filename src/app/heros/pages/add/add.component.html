@@ -1,1 +1,75 @@
-<p>add works!</p>
+<h1>
+    {{ (hero.id) ? 'Edit' : 'New' }}
+    Hero 
+    <small>
+        {{ hero.superhero }}
+    </small>
+</h1>
+
+
+<div fxLayout="row" fxLayoutGap="40px">
+
+    <div fxFlex="50" fxLayout="column">
+
+        <div 
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutGap="20px">
+            <mat-form-field fxFlex="100" fxLayout.xs="column">
+                <mat-label>Superhero</mat-label>
+                <input  [(ngModel)]="hero.superhero" matInput type="text" required>
+            </mat-form-field>
+    
+            <mat-form-field fxFlex="100" fxLayout.xs="column">
+                <mat-label>Alter ego</mat-label>
+                <input [(ngModel)]="hero.alter_ego" matInput type="text" required>
+            </mat-form-field>
+    
+        </div>
+
+        <mat-form-field fxFlex="100">
+            <mat-label>First appearance</mat-label>
+            <input [(ngModel)]="hero.first_appearance" matInput type="text" required>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="100">
+            <mat-label>Characters</mat-label>
+            <input [(ngModel)]="hero.characters" matInput type="text" required>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="100">
+            <mat-label>Publisher</mat-label>
+            <mat-select [(ngModel)]="hero.publisher" required>
+                <mat-option *ngFor="let item of publishers" [value]="item.id">{{ item.description }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="100">
+            <mat-label>Image</mat-label>
+            <input [(ngModel)]="hero.alt_image" matInput type="url" required>
+        </mat-form-field>
+
+        <br>
+
+        
+
+        <div fxLayout>
+            <button (click)="save()" mat-raised-button color="primary">
+                <mat-icon>edit</mat-icon>
+                Save
+            </button>
+            <div class="spacer"></div>
+            <button  *ngIf="hero.id" mat-raised-button color="warn" (click)="delete()">
+                <mat-icon>delete</mat-icon>
+                Borrar
+            </button>
+        </div>
+
+
+    </div>
+
+    <div fxFlex="50">
+        <img [src]="hero | imageFormat" alt="hero">
+    </div>
+
+</div>

@@ -1,0 +1,30 @@
+<div>
+    <div>
+        <h1>Heros searcher</h1>
+    </div>
+    <div fxLayout="column">
+        <h3>Searcher</h3>
+
+        <mat-form-field>
+            <input 
+                type="text" 
+                placeholder="Search..." 
+                aria-label="Number" 
+                matInput 
+                [(ngModel)]="term" 
+                (input)="search()"
+                [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption 
+                (optionSelected)="optionSelected($event)"
+                #auto="matAutocomplete">
+                <mat-option *ngFor="let hero of heros" [value]="hero">
+                    {{ hero.superhero }}
+                </mat-option>
+                <mat-option *ngIf="heros.length === 0 && term.trim().length > 0" value="" >
+                    No heros found...
+                </mat-option>
+            </mat-autocomplete>
+
+        </mat-form-field>
+    </div>
+</div>
